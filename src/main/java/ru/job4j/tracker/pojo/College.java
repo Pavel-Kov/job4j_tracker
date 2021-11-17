@@ -11,6 +11,6 @@ public class College {
 
         System.out.println("ФИО: " + student.getName() + System.lineSeparator()
                         + "Группа: " + student.getGroup() + System.lineSeparator()
-                        + "Дата поступления: " + student.getCreated() );
+                        + "Дата поступления: " + student.getCreated());
     }
 }
