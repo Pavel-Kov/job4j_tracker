@@ -12,8 +12,7 @@ public class Library {
         books[2] = book3;
         books[3] = book4;
 
-        for (int i = 0; i < books.length; i++) {
-            Book book = books[i];
+        for (Book book : books) {
             System.out.println(
                     "Название книги: " + book.getName() + ", "
                     + "Кол-во страниц: " + book.getPage());
@@ -23,16 +22,14 @@ public class Library {
         books[0] = books[3];
         books[3] = tmp;
 
-        for (int i = 0; i < books.length; i++) {
-            Book book = books[i];
+        for (Book book : books) {
             System.out.println(
                     "Название книги: " + book.getName() + ", "
                             + "Кол-во страниц: " + book.getPage());
         }
 
-        for (int i = 0; i < books.length; i++) {
-            Book book = books[i];
-            if (book.getName().equals("Clean code")) {
+        for (Book book : books) {
+            if ("Clean code".equals(book.getName())) {
                 System.out.println(
                         "Название книги: " + book.getName() + ", "
                                 + "Кол-во страниц: " + book.getPage());
