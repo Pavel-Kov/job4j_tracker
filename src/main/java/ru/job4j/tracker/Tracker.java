@@ -45,12 +45,15 @@ public class Tracker {
         return Arrays.copyOf(result, count);
     }
 
-    public Item[] replace(int id, Item item) {
+    public boolean replace(int id, Item item) {
+        boolean result = false;
         int index = indexOf(id);
-        int idSave = items[index].getId();
-        items[index] = item;
-        items[index].setId(idSave);
-        return items;
+        if (index != -1) {
+            item.setId(id);
+            items[index] = item;
+            result = true;
+        }
+    return result;
     }
 
     public Item[] delete(int id) {
