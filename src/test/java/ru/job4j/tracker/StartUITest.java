@@ -1,56 +1,126 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+import java.time.format.DateTimeFormatter;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertNull;
 
 public class StartUITest {
 
-    /*@Test
-    public void whenCreateItem() {
-        Input in = new StubInput(
-                new String[] {"0", "Item name", "1"}
-        );
+    @Test
+    public void whenReplaceItemTestOutputIsSuccessfully() {
+        Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
-                new CreateAction(),
-                new ExitAction()
+        Item one = tracker.add(new Item("test1"));
+        String replaceName = "New Test Name";
+        Input in = new StubInput(
+                new String[] {"0", String.valueOf(one.getId()), replaceName, "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new EditItemAction(out),
+                new ExitAction(out)
         };
-        new StartUI().init(in, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(out.toString(), is(
+                "Menu." + ln
+                        + "0. Edit item" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Edit item ===" + ln
+                        + "Заявка изменена успешно." + ln
+                        + "Menu." + ln
+                        + "0. Edit item" + ln
+                        + "1. Exit Program" + ln
+        ));
     }
 
     @Test
-    public void whenReplaceItem() {
+    public void whenFindAllItemTestOutputIsSuccessfully() {
+        Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("Replaced item"));
-        String id = String.valueOf(item.getId());
-        String replacedName = "New item name";
+        Item one = tracker.add(new Item("test1"));
         Input in = new StubInput(
-                new String[] {"0", id, replacedName, "1"}
+                new String[] {"0", "1"}
         );
-        UserAction[] actions = {
-                new EditItemAction(),
-                new ExitAction()
+        UserAction[] actions = new UserAction[]{
+                new ShowItemAction(out),
+                new ExitAction(out)
         };
-        new StartUI().init(in, tracker, actions);
-        assertThat(tracker.findById(item.getId()).getName(), is(replacedName));
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        String name = one.getName();
+        String id = String.valueOf(one.getId());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
+        String created = one.getCreated().format(format);
+        assertThat(out.toString(), is(
+                "Menu." + ln
+                        + "0. Show all items" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Show all items ===" + ln
+                        + "Item{id=" + id + ", name='" + name + "', created=" + created + "}" + ln
+                        + "Menu." + ln
+                        + "0. Show all items" + ln
+                        + "1. Exit Program" + ln
+        ));
     }
 
     @Test
-    public void whenDeleteItem() {
+    public void whenFindByNameItemTestOutputIsSuccessfully() {
+        Output out = new StubOutput();
         Tracker tracker = new Tracker();
-        Item item = tracker.add(new Item("Deleted item"));
-        String id = String.valueOf(item.getId());
+        Item one = tracker.add(new Item("test1"));
+        String name = "test1";
+        Input in = new StubInput(
+                new String[] {"0", name, "1"}
+        );
+        UserAction[] actions = new UserAction[]{
+                new FindNameItemAction(out),
+                new ExitAction(out)
+        };
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        String id = String.valueOf(one.getId());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
+        String created = one.getCreated().format(format);
+        assertThat(out.toString(), is(
+                "Menu." + ln
+                        + "0. Find items by name" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Find items by name ===" + ln
+                        + "Item{id=" + id + ", name='" + name + "', created=" + created + "}" + ln
+                        + "Menu." + ln
+                        + "0. Find items by name" + ln
+                        + "1. Exit Program" + ln
+        ));
+    }
+
+    @Test
+    public void whenFindByIdItemTestOutputIsSuccessfully() {
+        Output out = new StubOutput();
+        Tracker tracker = new Tracker();
+        Item one = tracker.add(new Item("test1"));
+        String id = String.valueOf(one.getId());
         Input in = new StubInput(
                 new String[] {"0", id, "1"}
         );
-        UserAction[] actions = {
-                new DeleteItemAction(),
-                new ExitAction()
+        UserAction[] actions = new UserAction[]{
+                new FindIdItemAction(out),
+                new ExitAction(out)
         };
-        new StartUI().init(in, tracker, actions);
-        assertNull(tracker.findById(item.getId()));
-    }*/
+        new StartUI(out).init(in, tracker, actions);
+        String ln = System.lineSeparator();
+        String name = one.getName();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
+        String created = one.getCreated().format(format);
+        assertThat(out.toString(), is(
+                "Menu." + ln
+                        + "0. Find item by id" + ln
+                        + "1. Exit Program" + ln
+                        + "=== Find item by id ===" + ln
+                        + "Item{id=" + id + ", name='" + name + "', created=" + created + "}" + ln
+                        + "Menu." + ln
+                        + "0. Find item by id" + ln
+                        + "1. Exit Program" + ln
+        ));
+    }
 }
