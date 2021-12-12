@@ -48,16 +48,12 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        String name = one.getName();
-        String id = String.valueOf(one.getId());
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String created = one.getCreated().format(format);
         assertThat(out.toString(), is(
                 "Menu." + ln
                         + "0. Show all items" + ln
                         + "1. Exit Program" + ln
                         + "=== Show all items ===" + ln
-                        + "Item{id=" + id + ", name='" + name + "', created=" + created + "}" + ln
+                        + one + ln
                         + "Menu." + ln
                         + "0. Show all items" + ln
                         + "1. Exit Program" + ln
@@ -79,15 +75,12 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        String id = String.valueOf(one.getId());
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String created = one.getCreated().format(format);
         assertThat(out.toString(), is(
                 "Menu." + ln
                         + "0. Find items by name" + ln
                         + "1. Exit Program" + ln
                         + "=== Find items by name ===" + ln
-                        + "Item{id=" + id + ", name='" + name + "', created=" + created + "}" + ln
+                        + one + ln
                         + "Menu." + ln
                         + "0. Find items by name" + ln
                         + "1. Exit Program" + ln
@@ -109,15 +102,12 @@ public class StartUITest {
         };
         new StartUI(out).init(in, tracker, actions);
         String ln = System.lineSeparator();
-        String name = one.getName();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-        String created = one.getCreated().format(format);
         assertThat(out.toString(), is(
                 "Menu." + ln
                         + "0. Find item by id" + ln
                         + "1. Exit Program" + ln
                         + "=== Find item by id ===" + ln
-                        + "Item{id=" + id + ", name='" + name + "', created=" + created + "}" + ln
+                        + one + ln
                         + "Menu." + ln
                         + "0. Find item by id" + ln
                         + "1. Exit Program" + ln
