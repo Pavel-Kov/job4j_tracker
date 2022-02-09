@@ -8,6 +8,8 @@ public class UsageMap {
         HashMap<String, String> map = new HashMap<>();
         map.put("test1@test.ru", "Ivanov");
         map.put("test2@test.ru", "Petrov");
+        map.put("test2@test.ru", "Petrov");
+        map.put("test3@test.ru", "Sidorov");
         map.put("test3@test.ru", "Sidorov");
 
         for (String key : map.keySet()) {
